@@ -19,16 +19,16 @@ if __name__ == '__main__':
     while True:
         print('sleeping...')
         time.sleep(60 * interval)
-        scrapy_count = 0
+        process_count = 0
         for proc in psutil.process_iter():
             try:
                 pinfo = proc.as_dict(attrs=['pid', 'name'])
                 if pinfo['name'] == process_name:
-                    scrapy_count += 1
+                    process_count += 1
             except psutil.NoSuchProcess:
                 pass
 
-        if scrapy_count > 0:
+        if process_count > 0:
             print(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()), 'process still running...')
         else:
             s = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()) + '    process down'
